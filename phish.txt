@@ -1,0 +1,20 @@
+python requests
+
+https://www.phishtank.com/view_phish_redirect.php?phish_id=4993065
+
+https://www.phishtank.com/view_phish_redirect.php?phish_id=$ID
+
+follow redirects -check
+
+directory traversal
+
+detect directory indexing
+catalog open ports
+geoip locater
+header detector
+save title page
+
+index of << in text = directory indexing
+
+
+Get validated
