@@ -1,0 +1,39 @@
+import os
+import sys
+import json
+import mechanize
+import requests
+import sys
+from mechanize import Browser
+
+
+url = sys.argv[1]
+ip = sys.argv[2]
+site_record = {}
+username = "admin"
+password = "password"
+
+br = mechanize.Browser()
+br.addheaders = [('User-agent', 'Firefox')]
+br.set_handle_equiv(True)
+br.set_handle_redirect(True)
+br.set_handle_robots(False)
+br.open(url)
+title = br.title()
+headers = br.response().get_all_header_names(normalize=True)
+if 'Server' in headers:
+    serv = br.response().__getitem__('Server')
+else:
+    serv = "N/A"
+if 'X-Powered-By' in headers:
+    xpow = br.response().__getitem__('X-Powered-By')
+else:
+    xpow = "N/A"
+
+site_record = {
+    'Server': serv,
+    'X-Powered-By':xpow,
+    'Title':title
+}
+uploadurl = "http://127.0.0.1:8081/artifactory/"+ip
+r = requests.put(uploadurl, data=site_record,auth=(username,password))
