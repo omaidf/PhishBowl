@@ -4,10 +4,7 @@ import sys
 ip = sys.argv[1]
 
 filepath = ip + '.xml'
-url = "http://127.0.0.1:8081/artifactory/phish/"+ip+"/"
+url = "http://127.0.0.1:8081/artifactory/phish/"+ip+"/"+filepath
 print url
-with open(filepath) as fh:
-    mydata = fh.read()
-    response = requests.put(url,
-               params={'file': filepath}
-                )
+files = {'file': open(filepath, 'rb')}
+response = requests.put(url, files=files)
